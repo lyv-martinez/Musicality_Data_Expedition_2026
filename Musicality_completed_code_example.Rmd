@@ -1,0 +1,179 @@
+---
+title: "Musicality_data_analysis"
+author: "write_your_name_here"
+output: html_document
+date: "2026-09-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1. Loading in Packages
+
+Load ggplot2, and viridis.
+
+```{r}
+#install.packages("ggplot2")
+#install.packages("viridis")
+
+library("ggplot2")
+library("viridis")
+```
+
+**Save** (Ctrl+S / Cmd+S)
+
+---
+
+# 2. Now let's load in the data
+
+Read in `Musicality_data_fall2026.csv` and name it `Data`.
+
+```{r}
+Data <- read.csv("Musicality_data_fall2026.csv")
+
+#Subset Data -> the line below will be added at the end of this tutorial
+
+#Data <- Data[c(31,32,33,37,38,39,10,11,12),] #example entries
+```
+
+---
+
+# 3. Observe the data
+
+Type `View(Data)` into the console, not a code block.
+
+---
+
+# 4. A reminder of our research questions
+
+- Can practice improve rhythm?
+- Is there a relationship between rhythm and pitch?
+- Can we predict who has musical experience from their rhythm/pitch ratio?
+
+---
+
+# 5. Model 1: Can practice improve rhythm?
+
+Gaussian glm with Rhythm as the response and Attempt as the predictor, then a summary table.
+
+```{r}
+#Can practice improve rhythm?
+Model1 <- glm(Rhythm ~ Attempt, data = Data)
+summary(Model1)
+```
+
+## Figure 1
+
+Box plots of rhythm for each attempt, with the line of best fit.
+
+```{r}
+ggplot(data = Data,
+       aes(x = as.factor(Attempt),
+           y = Rhythm,
+           col = as.factor(Attempt))) +
+  geom_jitter() +
+  geom_boxplot() +
+  geom_smooth(aes(x = Attempt,
+                  y = Rhythm,
+                  col = Attempt),
+              method = lm) +
+  ggtitle("Can practice improve rhythm?") +
+  ylab("Rhythm Score") +
+  xlab("Attempt") +
+  guides(color = guide_legend(title = "Attempt")) +
+  scale_color_viridis(discrete = TRUE, 
+                      option = "viridis") +
+  theme_bw()
+```
+
+**Save** (Ctrl+S / Cmd+S)
+
+---
+
+# 6. Model 2: Is there a relationship between rhythm and pitch?
+
+Gaussian glm with Rhythm as the response and Pitch as the predictor, then a summary table.
+
+```{r}
+#Is there a relationship between rhythm and pitch?
+Model2 <- glm(Rhythm ~ Pitch, data = Data)
+summary(Model2)
+```
+
+## Figure 2
+
+Scatter plot of rhythm vs. pitch, with the line of best fit.
+
+```{r}
+ggplot(data = Data,
+       aes(y = Rhythm,
+           x = Pitch)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  ylab("Rhythm Score") +
+  xlab("Pitch Score") +
+  ggtitle("Is there a relationship between rhythm and pitch?") +
+  theme_bw()
+```
+
+**Save** (Ctrl+S / Cmd+S)
+
+---
+
+# 7. Model 3: Can we predict who has musical experience from their rhythm/pitch ratio?
+
+Binomial glm with Experience as the response and Ratio as the predictor, then a summary table.
+
+```{r}
+#Can we predict who has musical experience from their rhythm/pitch ratio?
+Model3 <- glm(Experience ~ Ratio, family = "binomial", data = Data)
+summary(Model3)
+```
+
+## Figure 3
+
+Experience vs. ratio, with the S-shaped curve from the binomial model.
+
+```{r}
+ggplot(data = Data,
+       aes(x = Ratio,
+           y = Experience)) +
+  geom_point() +
+  stat_smooth(method = "glm",
+              method.args = list(family = "binomial"), 
+              se = T) +
+  ylab("Musical Experience") +
+  xlab("Rhythm/Pitch Score") +
+  ggtitle("Can we predict who has musical experience from their rhythm/pitch ratio?") +
+  theme_bw()
+```
+
+**Save** (Ctrl+S / Cmd+S)
+
+---
+
+# 8. Now let's look at just your group's data
+
+Under the code chunk in #2, create another code chunk
+
+Subset `Data` to just your group's rows
+
+then Run All (Windows: Ctrl+Alt+R, Mac: Cmd+Option+R) and answer all homework questions
+
+
+# 9. Knit
+
+Click **Knit** (the ball of yarn) at the top of the file.
+(you can either answer the homework questions in this Rmarkdown file, or copy and paste, questions and answers into a word document)
+
+
+# 10. Now open the word document and answer all questions with your group
+
+---
+
+# 11. Exit Ticket 
+
+By the end of class please email your individual knitted Rmarkdown file. Please also have 1 person in your group send your groups completed homework answers. 
+
+Email all to lyv.martinez@duke.edu, natalie.donato@duke.edu, and brendan.lan@duke.edu
