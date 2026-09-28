@@ -1,2 +1,5 @@
 # Musicality_Data_Expedition_2026
 This repo includes instructions on how to run this class module with suggestions for future iterations
+
+* 'Musicality_completed_code_example.Rmd' includes the R markdown code that they will be copying during the live coding portion of the class. For future users, keep all regular text, but delete all code from the chunks, and share the code-empty Rmarkdown file with the students to work in. Keep the completed one for your reference while teaching and/or troubleshooting. Alternatively, you could also create an Rshiny app for this module, especially if this module is ever ran during a shorter class period. 
+* 'Musicality_Homework_Question.docx' includes the questions that the groups will be answering together for each of the 3 models they will be runing with their code.
