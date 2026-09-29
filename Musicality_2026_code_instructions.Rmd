@@ -1,0 +1,293 @@
+---
+title: "Musicality Lab Coding Instructions"
+author: "Lyv Zoroya"
+output:
+  html_document:
+    toc: true
+    toc_depth: 1
+    theme: flatly
+    highlight: tango
+---
+
+```{css, echo=FALSE}
+pre, pre code { white-space: pre-wrap; word-break: break-word; }
+@media print { pre { page-break-inside: avoid; } img { page-break-inside: avoid; } }
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, fig.width = 7, fig.height = 4.5)
+```
+
+# 1. We're working in R Markdown today
+
+- An R Markdown file lets us write regular text and code in the same document.
+- Text goes outside the code blocks, code goes inside them.
+- At the end of class we'll knit it, which turns the whole thing into a clean report with our text, code, results, and figures. This page is a knitted R Markdown file.
+
+---
+
+# 2. Let's save a file in the same folder as your data
+
+- File -> New File -> R Markdown. Title: Musicality Lab, author: your name, click OK.
+    - The first time, RStudio may ask to install some packages. Click yes.
+- Delete the example text below the header (everything after the second `---`).
+- File -> Save. Name it `Musicality.Rmd` and save it **in the same folder as `Musicality_Fall_2024.csv`**.
+    - If your R file and your data are in the same folder, R can find your data without a file path.
+    - Knitting only works if R can find your data, so this saves us a headache at the end.
+- Good file names have no spaces or special characters.
+- Save often. Windows: Ctrl+S, Mac: Cmd+S.
+- If you want to write notes to yourself inside a code block, start the line with `#`. Outside a code block, `#` makes a header instead.
+
+---
+
+# 3. Packages
+
+First we're going to download packages. These are "add-ons" or "extensions" that expand R's capabilities past its base features. It's pre-written code that makes data manipulation, advanced statistics, and visualizations easier.
+
+- To create a new code block use Windows: Ctrl+Alt+I, Mac: Cmd+Option+I.
+- Run a code block with the green arrow in the top right corner of the code block.
+
+The packages we're going to use today are:
+
+- "ggplot2", which helps make pretty graphs.
+- "viridis", which is a mathematically designed color palette that allows us to add nice colors to our graphs. It was actually created to help people create visualizations that are readable to colorblind viewers, especially since many plots look terrible when they're in black and white.
+
+```{r}
+library("ggplot2")
+library("viridis")
+```
+
+If you need to install the packages you can either write the code below, or go to Packages -> Install.
+
+- You only install a package once, but you load it with `library()` every time you open R.
+- Keep these commented out after you install them once, or knitting will break.
+
+```{r}
+#install.packages("readr")
+#install.packages("ggplot2")
+#install.packages("viridis")
+```
+
+**Save** (Ctrl+S / Cmd+S)
+
+---
+
+# 4. Now let's load in the data
+
+We assign our dataset a variable name to make calling it later easier.
+
+- Windows: Alt + - creates the arrow faster. Mac: Option + -
+
+```{r}
+Data <- read.csv("Musicality_Fall_2024.csv")
+```
+
+If you are getting an error with this step it means your R file is NOT saved in the same folder as your data, so you have to give R a file path.
+
+```{r}
+#file_path <- "C:/Users/User/Downloads"
+#Data <- read.csv(file.path(file_path, "Musicality_Fall_2024.csv"))
+```
+
+
+---
+
+# 5. Observe your data 
+
+- Type `View(Data)` into the console.
+
+In Excel the 1st row is your header/column names, but in R the first row is the 1st row of data. So basically if in your Excel file your name is in row 32, in R your name is in row 31.
+
+- Pitch, Experience, and Ratio were only recorded once per person, so they're written in as `NA` for attempts 2 and 3.
+- Ratio is each person's average rhythm score across their 3 attempts divided by their pitch score.
+
+**Save** (Ctrl+S / Cmd+S)
+
+---
+
+# 6. A reminder of our research questions
+
+- Can practice improve rhythm?
+- Is there a relationship between rhythm and pitch?
+- Can we predict who has musical experience from their rhythm/pitch ratio?
+
+---
+
+# 7. Model 1: Can practice improve rhythm?
+
+- We are going to use a generalized linear model, aka a glm.
+- We are going to put Rhythm as the response (dependent variable) and Attempt as the predictor (independent variable).
+- So with this code we are asking: does attempt predict rhythm?
+
+```{r}
+Model1 <- glm(Rhythm ~ Attempt, data = Data)
+```
+
+What this is saying is that we want a generalized linear model of rhythm, modeled as a function of Attempt. There are several different types of linear models, so if you don't specify one R's default is a Normal (Gaussian) distribution. In other words a plain linear regression, aka a "line of best fit", which is what we want to answer this question.
+
+Now let's print a summary table.
+
+```{r}
+summary(Model1)
+```
+
+The thing to focus on is the Coefficients table:
+
+- **(Intercept):** the predicted rhythm score when Attempt (x) = 0.
+- **Attempt Estimate:** the slope. How much rhythm changes, on average, with each additional attempt.
+- **Std. Error:** how uncertain that estimate is. Smaller is more precise.
+- **Pr(>|t|):** the p-value. Is the slope different from zero? (commonly p < 0.05)
+
+p-val is 0.27  based off the numbers there's no evidence that rhythm is improved across attempts.
+don't get distracted by the p-val on the intercept. Its just telling you that rhythm scores arnt zero. However, it is good to know that the * is R shorthand for a a significant p-val (below 0.05), and the *** is R shorthand for a very small p-value (below 0.001).
+
+## Figure 1
+
+Now let's visualize these numbers.
+
+1. Call our data and define our x and y.
+    - `col = as.factor(Attempt)` makes each attempt a different color on the graph.
+    - The `+` allows us to build a graph in layers.
+2. `geom_boxplot` creates a box and whiskers plot around each attempt's data.
+    - Does everyone know what a box and whiskers plot is showing?
+    - Give whale example.
+3. `geom_jitter` nudges points sideways by up to 0.1, so that if there's any overlapping datapoints you can still see all the points.
+4. `geom_smooth` adds our line of best fit, which represents the numbers we calculated above. `method = lm` means linear model.
+5. Now we add a title and labels to the axes.
+6. `guides` names our color legend, so our audience knows that the different colors correspond with different attempts.
+7. `scale_color_viridis` adds the viridis color palette, which is the package we downloaded earlier.
+8. `theme_bw` changes the theme of the graph. The default is a grey background, so this turns it white.
+
+```{r}
+ggplot(data = Data,
+       aes(x = as.factor(Attempt),
+           y = Rhythm,
+           col = as.factor(Attempt))) +
+  geom_boxplot() +
+  geom_jitter(width = 0.1) +
+  geom_smooth(aes(x = Attempt,
+                  y = Rhythm,
+                  group = 1),
+              method = lm,
+              col = "black") +
+  ggtitle("Can practice improve rhythm?") +
+  ylab("Rhythm Score") +
+  xlab("Attempt") +
+  guides(color = guide_legend(title = "Attempt")) +
+  scale_color_viridis(discrete = TRUE,
+                      option = "viridis") +
+  theme_bw()
+```
+
+- Boxes show the spread for each attempt, dots are individual scores, and the black line is the line of best fit from Model 1.
+
+remind students to **Save** (Ctrl+S / Cmd+S)
+
+---
+
+# 8. Model 2: Is there a relationship between rhythm and pitch?
+
+Now we are going to do the same thing, but we are going to put Rhythm as the response and Pitch as the predictor.
+
+```{r}
+Model2 <- glm(Rhythm ~ Pitch, data = Data)
+summary(Model2)
+```
+- Here our p val is 0.08 so there is not a significant relationship between pitch and rhythm.
+- You may notice that there is a . next to the p-val. That is R's symbolor short-hand for when a p-val is between 0.05 and 0.1. so its telling you the p-val is close to the significance cutoff, but still slightly above it
+- "Observations deleted due to missingness" are the attempt 2 and 3 rows where Pitch is `NA`.
+
+## Figure 2
+
+`geom_point` creates the scatter plot.
+
+```{r}
+ggplot(data = Data,
+       aes(y = Rhythm,
+           x = Pitch)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  ggtitle("Is there a relationship between rhythm and pitch?") +
+  ylab("Rhythm Score") +
+  xlab("Pitch Score") +
+  theme_bw()
+```
+
+-even though our p val is insignificant, our slope is trending in a positive direction.
+- The gray band is the 95% confidence interval (or the uncertainty) around the line. It's basically a buffer around the trend in your data.
+
+Think of the weather. If the weather man said it was going to be exactly 71.4 degrees out tomorrow you probably would be skeptical, but if they said it was going to be somewhere between 70 and 73 degrees out, you would trust it more.
+
+Remind students to **Save** (Ctrl+S / Cmd+S)
+
+---
+
+# 9. Model 3: Can we predict who has musical experience from their rhythm/pitch ratio?
+
+In our above line of best fit models, our data was continuous, meaning it could be any number along a range. But experience isn't continuous in our dataset, it's binary with only 0 (no experience) and 1 (with experience). So we need to do a binomial model.
+
+- `family = "binomial"` tells R that each observation is basically a success/failure outcome.
+- Since we can't go below 0 or above 1, we fit an S-shaped curve to the data, instead of a straight line.
+
+```{r}
+Model3 <- glm(Experience ~ Ratio, family = "binomial", data = Data)
+summary(Model3)
+```
+We pay attention to the Ratio row, which tells us whether the ratio is related to the odds of having musical experience. in this example the p val is 0.457, so there is not a significant relationship.
+
+## Figure 3
+
+`stat_smooth` draws the S-shaped curve from our binomial model onto the plot, with a shaded band showing the 95% confidence interval.
+
+```{r}
+ggplot(data = Data,
+       aes(x = Ratio,
+           y = Experience)) +
+  geom_point() +
+  stat_smooth(method = "glm",
+              method.args = list(family = "binomial"),
+              se = TRUE) +
+  ggtitle(" Can we predict who has musical experience from their rhythm/pitch ratio?") +
+  ylab("Musical Experience") +
+  xlab("Rhythm/Pitch Ratio") +
+  theme_bw()
+```
+
+- The curve is the predicted probability of having musical experience.
+
+Remind students to **Save** (Ctrl+S / Cmd+S)
+
+---
+
+# 10. Now let's look at just your group's data
+
+- Scroll back up to where we imported the dataset.
+- Type `View(Data)` into the console.
+- Find your group's rows and note the row numbers that are on the far left.
+- Now let's create a subset of your group's data.
+
+`c` is the "combine function", so in this case we are combining multiple rows into a subset of the full dataset.
+
+- Before you click run, note that this overwrites Data with just your group, so the full class's data will no longer be in your R.
+
+```{r, eval=FALSE}
+Data <- Data[c(94,95,96,97,98,99,100,101,102),]
+```
+
+Now run everything again: Run -> Run All (Windows: Ctrl+Alt+R, Mac: Cmd+Option+R). Every model and figure now uses only your group's data.
+
+- Note: If everyone in your group has the same Experience level, Model 3 will break (huge standard errors, p = 1). The model can't compare experience to no experience if nobody in the group is missing it.
+
+---
+
+# 11. Knit
+
+- Click **Knit** (the ball of yarn) at the top of the file.
+- Knitting runs your whole file from top to bottom.
+- The report (.html) saves in the same folder as your .Rmd.
+- For a Word document instead, change `output: html_document` at the top to `output: word_document`.
+- If it fails:
+    - your .Rmd isn't in the same folder as your data.
+    - data was loaded with the Import Dataset button, not in a code block.
+    - an `install.packages()` line isn't commented out.
+    - `View(Data)` is inside a code block. Move it to the console.
