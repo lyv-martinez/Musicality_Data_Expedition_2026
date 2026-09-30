@@ -163,7 +163,6 @@ Now, Run All (Windows: Ctrl+Alt+R, Mac: Cmd+Option+R) and answer all homework qu
 # 9. Knit
 
 Click **Knit** (the ball of yarn) at the top of the file.
-(you can either answer the homework questions in this Rmarkdown file, or copy and paste, questions and answers into a word document)
 
 ---
 
