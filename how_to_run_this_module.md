@@ -24,9 +24,11 @@ We then let them choose their groups, open the homework document, make a copy of
 * Can we predict who has musical experience from their rhythm/pitch ratio?
 
 ## Live Coding:
-This section took a little over an hour to complete. We shared an Rmarkdown file with all the students, so that we're all working with the same format. This R tutorial only used the packages 'ggplot2' and 'viridis'. We had them create 3 different models to answer the three questions above.
+This section took about an hour to complete. We shared an Rmarkdown file with all the students, so that we're all working with the same format. This R tutorial only used the packages 'ggplot2' and 'viridis'. We had them create 3 different models to answer the three questions above with the whole class data set.
 
 For each model they analyzed the p-value to determine if the results were significant or not (<0.05). The first model the students learned how to turn continuous data into categorical data, color their plot points by category, jitter the points so that no two points are overlapping, create boxplots, and create a linear regression (line-of-best-fit). During the second model they learned about confidence intervals and how to create a scatter plot. And lastly, the third model taught them how to preform a binomial model when working with binary data and creating an S shaped line-of-best-fit on their graph. 
+
+They ran this code again but with a subset of the data that only includes their groups data. They were then given about 15 minutes to work in their groups to answer all homework questions. As an exit ticket, they emailed us their individual knitted code html/pdf file and their collective groups answers to the homework questions.
 
 ## Discussion:
 We decided to make the discussion piece the last part of class (ca. 20 minutes), in order to make sure we had an ample amount of time to code and move at the students pace. 
