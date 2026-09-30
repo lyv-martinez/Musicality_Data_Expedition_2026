@@ -11,6 +11,7 @@ We started off class with playing music at a low volume, to set the tone as stud
 
 ### Pitch and Rhythm Tests
 Pitch: https://www.nidcd.nih.gov/tunestest/take-distorted-tunes-test
+
 Rhythm: https://www.concerthotels.com/got-rhythm
 
 ### Live Coding:
