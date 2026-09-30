@@ -1,6 +1,6 @@
 # How to run the data expedition: Testing musicality - from demonstration to data analysis 
 
-### The day before class:
+### A few days prior to class:
 Have the students download R, read all the papers, and remind them to bring their laptops and earbuds. 
 Also send the empty Rmarkdown file, online excel sheet, online word document so they have easy access to everything they need on the day of class
 
