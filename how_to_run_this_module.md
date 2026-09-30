@@ -8,7 +8,7 @@ Also send the empty Rmarkdown file, online excel sheet, online word document so 
 We started off class with playing music at a low volume, to set the tone as students settled in. 
 
 ### Presentation:
-We led off class 
+We led off class with a 15 minute presentation. We first asked the students to describe "what is music?" in their own words. We then went into individually explaining rhythm, pitch, and their intersection.
 
 ### Pitch and Rhythm Tests
 Pitch: https://www.nidcd.nih.gov/tunestest/take-distorted-tunes-test
