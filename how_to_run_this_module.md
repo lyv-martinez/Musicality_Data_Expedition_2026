@@ -2,12 +2,13 @@
 
 ### A few days prior to class:
 Have the students download R, read all the papers, and remind them to bring their laptops and earbuds. 
-Also send the empty Rmarkdown file, online excel sheet, online word document so they have easy access to everything they need on the day of class
+Also send the empty Rmarkdown file, online excel sheet, online word document so they have easy access to everything they need on the day of class.
 
 ### Start of class:
 We started off class with playing music at a low volume, to set the tone as students settled in. 
 
 ### Presentation:
+We led off class 
 
 ### Pitch and Rhythm Tests
 Pitch: https://www.nidcd.nih.gov/tunestest/take-distorted-tunes-test
@@ -15,7 +16,7 @@ Pitch: https://www.nidcd.nih.gov/tunestest/take-distorted-tunes-test
 Rhythm: https://www.concerthotels.com/got-rhythm
 
 ### Live Coding:
-We shared an Rmarkdown file with all the students, so that were all working with the same format. This R tutorial only used the packages 'ggplot2' and 'viridis'. We had them create 3 different models to answer these three questions:
+We shared an Rmarkdown file with all the students, so that we're all working with the same format. This R tutorial only used the packages 'ggplot2' and 'viridis'. We had them create 3 different models to answer these three questions:
 * Can practice improve rhythm?
 * Is there a relationship between rhythm and pitch?
 * Can we predict who has musical experience from their rhythm/pitch ratio?
