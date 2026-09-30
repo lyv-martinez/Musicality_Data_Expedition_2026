@@ -155,11 +155,9 @@ ggplot(data = Data,
 
 # 8. Now let's look at just your group's data
 
-Under the code chunk in #2, create another code chunk
+Within the code chunk in #2 where we loaded in the data we are going to create a subset of `Data` with just your group's rows
 
-Subset `Data` to just your group's rows
-
-then Run All (Windows: Ctrl+Alt+R, Mac: Cmd+Option+R) and answer all homework questions
+Now, Run All (Windows: Ctrl+Alt+R, Mac: Cmd+Option+R) and answer all homework questions about your groups data and how it compares to the whole class data.
 
 
 # 9. Knit
@@ -167,12 +165,9 @@ then Run All (Windows: Ctrl+Alt+R, Mac: Cmd+Option+R) and answer all homework qu
 Click **Knit** (the ball of yarn) at the top of the file.
 (you can either answer the homework questions in this Rmarkdown file, or copy and paste, questions and answers into a word document)
 
-
-# 10. Now open the word document and answer all questions with your group
-
 ---
 
-# 11. Exit Ticket 
+# 10. Exit Ticket 
 
 By the end of class please email your individual knitted Rmarkdown file. Please also have 1 person in your group send your groups completed homework answers. 
 
