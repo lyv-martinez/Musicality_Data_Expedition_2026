@@ -9,3 +9,5 @@ This repo includes instructions on how to run this class module with suggestions
   * How to explain rhythm: https://drive.google.com/file/d/1pEkxBwB0brcKUOmNQjFGOI2jEi8HHz-3/view?usp=drive_link
   * How to explain pitch: https://drive.google.com/file/d/1eYkxMbEgGXO5CH2q7Q6WIsjoIwUHO-d0/view?usp=drive_link
   * Distinguishing the characterists between rhythm and pitch: https://drive.google.com/file/d/1_f_P-BeOG5lVt-v4QE84dLl_1XBFVKqE/view?usp=sharing
+* 'Musicality_data_fall2026' is the data we collected during class
+* 'Musicality_class_data_plots' are the plots and p-values we got after analyzing the whole-class data together
