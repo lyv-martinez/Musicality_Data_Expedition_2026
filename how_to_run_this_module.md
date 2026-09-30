@@ -14,4 +14,5 @@ We had the students read these four papers before class:
 * https://www.sciencedirect.com/science/article/pii/S001002779900061X
 * https://www.sciencedirect.com/science/article/pii/S0960982223003871
 * https://link.springer.com/article/10.1007/s10071-024-01875-5
+  
 Dr. Johnsen assigned 2 students to lead the discussion prior to this module, so we were just their to facilitate and guide them through the main points of the papers and bring up other interesting questions and examples. For example the dog on America's Got Talent that is able to match its owners pitch!
