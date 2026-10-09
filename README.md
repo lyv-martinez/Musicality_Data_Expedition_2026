@@ -11,3 +11,5 @@ This repo includes instructions on how to run this class module with suggestions
   * Distinguishing the characterists between rhythm and pitch: https://drive.google.com/file/d/1_f_P-BeOG5lVt-v4QE84dLl_1XBFVKqE/view?usp=sharing
 * 'Musicality_data_fall2026' is the data we collected during class.
 * 'Musicality_class_data_plots' are the plots and p-values we got after analyzing the whole-class data together.
+* 'how_to_run_this_modules' walks the next instructors through how we decided to run this module
+* 'suggestions_for_the_future' provides examples of how this module could change for future iterations to provide new and exciting learning experiences.
