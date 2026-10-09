@@ -2,7 +2,7 @@
 
 ## A few days prior to class:
 Have the students download R, read all the papers, and remind them to bring their laptops and earbuds. 
-Also send the empty Rmarkdown file, online excel sheet, online word document so they have easy access to everything they need on the day of class.
+Also send the links to the rhythm and pitch tests, the empty Rmarkdown file, link to online excel sheet, link to online word document so that they have easy access to everything they need on the day of class.
 
 ## Start of class:
 We started off class with playing music at a low volume, to set the tone as students settled in. 
